@@ -1,0 +1,105 @@
+<div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content" style="color: #29292c">
+                    <div class="row">
+                        <div class="col s5">
+                            <form #blogForm="ngForm" (ngSubmit)="onSubmit(blogForm)">
+                                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="blogService.selectedBlog._id">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">title</i>
+                                        <label>Title: 
+                                            <label class="red-text">*</label>
+                                        </label>
+                                        <input type="text" name="title" #name="ngModel" [(ngModel)]="blogService.selectedBlog.title" placeholder="Enter Title" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">mode_edit</i>
+                                        <label>Content: 
+                                            <label class="red-text">*</label>
+                                        </label>
+                                        <textarea class="materialize-textarea" name="content" #name="ngModel" [(ngModel)]="blogService.selectedBlog.content" placeholder="Enter Content" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">label</i>
+                                        <label>Tags: </label>
+                                        <input type="text" name="tagString" [(ngModel)]="tagString" placeholder="#Tag1 #Tag2 #Tag3, ...">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <button class="btn btn-custom btn-small right" type="button" (click)="resetForm(blogForm)">
+                                            Reset<i class="material-icons right">refresh</i>
+                                        </button>
+                                        <button class="btn btn-custom btn-small right" type="submit" [disabled]="!blogForm.valid" style="margin-right: 4px;">
+                                            Submit<i class="material-icons right">send</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col s7">
+                            <table class="responsive-table highlight" *ngIf="blogService.blogs != undefined"> 
+                                <div *ngIf="!getAllFlag; else getAll">
+                                    <tr *ngFor="let i of [0,1,2]" class="col s12">
+                                        <div class="col s11" *ngIf="blogService.blogs[i]">
+                                            <h3>{{blogService.blogs[i].title}}
+                                                <small style="color: gray; font-size: 0.5em;">
+                                                    <i class="material-icons" style="position:relative; top: 0.25em; font-size: 1.5em;">access_time</i>
+                                                    {{blogService.blogs[i].date | date:'MMM dd, yyyy, hh:mm a'}}
+                                                </small>
+                                            </h3>
+                                            <div *ngFor="let tag of blogService.blogs[i].tags" style="display: inline;">
+                                                <span class="label" style="background-color: fuchsia; margin: 2px;">{{tag}}</span>
+                                            </div>
+                                            <p style="margin-top: 4px; font-size: 1.3em; max-height:20vh; overflow: auto;">{{blogService.blogs[i].content}}</p>
+                                        </div>
+                                        <h3 class="col s1" *ngIf="blogService.blogs[i]">
+                                            <a class="action-btn" (click)="onEdit(blogService.blogs[i])"><i class="material-icons" style="color: fuchsia;">edit</i></a>
+                                            <a class="action-btn" (click)="onDelete(blogService.blogs[i]._id, blogForm)" style="color: fuchsia;"><i class="material-icons"> delete</i></a>
+                                        </h3>
+                                    </tr>
+                                    <div class="col s12" style="margin-top: 2em;">
+                                        <button class="btn btn-custom btn-small right" type="button" (click)="getAllBlogs()">
+                                            Get All<i class="material-icons right">refresh</i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <ng-template #getAll>
+                                    <tr *ngFor="let blog of blogService.blogs" class="col s12">
+                                        <div class="col s11" *ngIf="blog">
+                                            <h3>{{blog.title}}
+                                                <small style="color: gray; font-size: 0.5em;">
+                                                    <i class="material-icons" style="position:relative; top: 0.25em; font-size: 1.5em;">access_time</i>
+                                                    {{blog.date | date:'MMM dd, yyyy, hh:mm a'}}
+                                                </small>
+                                            </h3>
+                                            <div *ngFor="let tag of blog.tags" style="display: inline;">
+                                                <span class="label" style="background-color: fuchsia; margin: 2px;">{{tag}}</span>
+                                            </div>
+                                            <p style="margin-top: 4px; font-size: 1.3em;">{{blog.content}}</p>
+                                        </div>
+                                        <h3 class="col s1" *ngIf="blog">
+                                            <a class="action-btn" (click)="onEdit(blogService.blogs[i])"><i class="material-icons" style="color: fuchsia;">edit</i></a>
+                                            <a class="action-btn" (click)="onDelete(blogService.blogs[i]._id, blogForm)" style="color: fuchsia;"><i class="material-icons"> delete</i></a>
+                                        </h3>
+                                    </tr>
+                                    <div class="col s12" style="margin-top: 2em;">
+                                        <button class="btn btn-custom btn-small right" type="button" (click)="getLessBlogs()">
+                                            Get Less<i class="material-icons right">refresh</i>
+                                        </button>
+                                    </div>
+                                </ng-template>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    

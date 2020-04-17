@@ -1,0 +1,34 @@
+
+/*material css*/
+.input-field label {
+    color: fuchsia;
+  }
+  .input-field input[type=text]:focus + label, .input-field input[type=email]:focus + label, .input-field textarea:focus + label {
+    color: fuchsia;
+  }
+  .input-field input[type=text]:focus, .input-field input[type=email]:focus, .input-field textarea:focus {
+    border-bottom: 1px solid fuchsia;
+    box-shadow: 0 1px 0 0 fuchsia;
+  }
+  .input-field input[type=text].valid, .input-field input[type=email].valid, .input-field textarea.valid {
+    border-bottom: 1px solid fuchsia;
+    box-shadow: 0 1px 0 0 fuchsia;
+  }
+  .input-field input[type=text].invalid, .input-field input[type=email].invalid, .input-field textarea.invalid {
+    border-bottom: 1px solid red;
+    box-shadow: 0 1px 0 0 red;
+  }
+  .input-field .prefix.active {
+    color: fuchsia;
+  }
+  button {
+    background-color: fuchsia;
+  }
+  button:hover, button:active, button:link, button:focus {
+    background: transparent;
+    color: fuchsia;
+    border: 0.1em solid fuchsia;
+    box-sizing: border-box;
+  }
+  /*material css ends*/
+  

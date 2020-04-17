@@ -1,0 +1,48 @@
+.row.content {height: 1500px}
+/* Set gray background color and 100% height */
+.sidenav2 {
+  background-color: #777;
+  height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height: auto;} 
+}
+
+input[type=text].form-control:focus, input[type=text].form-control:active {
+  border-bottom: 0.1em solid fuchsia;
+}
+button{
+  position: relative;
+  bottom: 0.4em;
+}
+input {
+  color: white;
+}
+
+#websiteTitle {
+  color: white;
+  text-shadow: 0 0 2px fuchsia;
+  letter-spacing: 0.2em;
+  margin-bottom: 1em;
+}
+.sidenav2 ul li a {
+  background-color: #f1f1f1;
+  color: black;
+}
+.sidenav2 ul li a:hover {
+  background-color: lightgray;
+  color: black;
+}

@@ -1,0 +1,258 @@
+<app-nav-bar></app-nav-bar>      
+    <div class="background"><div class="layer">
+      <div id="firstSection">
+        <p id="typed">Write a blog today...</p>
+          <div class="wow slideInLeft">
+            <div class="register signup">
+                <div *ngIf="isLoggedIn; else elseBlock2">
+                  Manage my website...
+                  <a [routerLink]="['/dashboard', getLoggedInUser()]" class="button" (mouseenter) ="mouseEnter($event)"  (mouseleave) ="mouseLeave($event)">My Account</a>
+                </div>
+                <ng-template #elseBlock2>
+                  Create an account now!
+                  <a [routerLink]="'/register'" class="button" (mouseenter) ="mouseEnter($event)"  (mouseleave) ="mouseLeave($event)">Sign Up</a>
+                </ng-template>
+            </div>
+          </div>
+          <div class="wow slideInRight">
+            <div class="register login">
+                <div *ngIf="isLoggedIn; else elseBlock4">
+                  Add/Edit My Blogs...
+                  <a href="#firstBlog" class="button" (mouseenter) ="mouseEnter($event)"  (mouseleave) ="mouseLeave($event)">Manage Blogs</a>
+                </div>
+                <ng-template #elseBlock4>
+                  Already a user?
+                  <a [routerLink]="'/login'" class="button" (mouseenter) ="mouseEnter($event)"  (mouseleave) ="mouseLeave($event)">Sign In</a>
+                </ng-template>
+            </div>
+          </div>
+      </div>
+    </div></div>
+    
+    <div class="jumbotron" id="recent">
+      <div class="container-fluid" style="padding: 0;">    
+        <h2 class="recent">Recent Posts</h2>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox" *ngIf="blogService.blogs != null && blogService.blogs != undefined">
+              <!--
+            <div *ngFor="let i of [0,1,2]">
+              <div *ngIf="blogService.blogs[i] != undefined">
+                <div *ngIf="i==0; else notActive">
+                  <div class="item active">
+                    <h4>{{blogService.blogs[i].title}}
+                        <small style="color: gray; font-size: 0.5em;">
+                            <i class="material-icons" style="position:relative; top: 0.25em; font-size: 1.5em;">access_time</i>
+                            {{blogService.blogs[i].date | date:'MMM dd, yyyy, hh:mm a'}}
+                        </small>
+                    </h4>
+                    <div *ngFor="let tag of blogService.blogs[i].tags" style="display: inline;">
+                        <span class="label" style="background-color: fuchsia; margin: 2px;">{{tag}}</span>
+                    </div>
+                    <p style="margin-top: 4px; font-size: 1.3em;">{{blogService.blogs[i].content}}</p>
+                  </div>
+                </div>
+                <ng-template #notActive>
+                  <div class="item">
+                    <h4>{{blogService.blogs[i].title}}
+                        <small style="color: gray; font-size: 0.5em;">
+                            <i class="material-icons" style="position:relative; top: 0.25em; font-size: 1.5em;">access_time</i>
+                            {{blogService.blogs[i].date | date:'MMM dd, yyyy, hh:mm a'}}
+                        </small>
+                    </h4>
+                    <div *ngFor="let tag of blogService.blogs[i].tags" style="display: inline;">
+                        <span class="label" style="background-color: fuchsia; margin: 2px;">{{tag}}</span>
+                    </div>
+                    <p style="margin-top: 4px; font-size: 1.3em;">{{blogService.blogs[i].content}}</p>
+                  </div>
+                </ng-template>
+              </div>
+            </div>-->
+            <div class="item active" *ngIf="blogService.blogs[0] != null && blogService.blogs[0] != undefined">
+                <h4>{{blogService.blogs[0].title}}</h4>
+                <p>{{blogService.blogs[0].content}}</p>
+            </div>
+            <div class="item" *ngIf="blogService.blogs[1] != null && blogService.blogs[1] != undefined">
+                <h4>{{blogService.blogs[1].title}}</h4>
+                <p>{{blogService.blogs[1].content}}</p>
+            </div>
+            <div class="item" *ngIf="blogService.blogs[2] != null && blogService.blogs[2] != undefined">
+                <h4>{{blogService.blogs[2].title}}</h4>
+                <p>{{blogService.blogs[2].content}}</p>
+            </div>
+<!--
+            <div class="item">
+                <h4>Hello!  My name is Drew Binsky</h4>
+                <p>I’ve been to 169 countries since 2012, and I work as a full-time
+                    video maker (@DrewBinsky® videos), travel blogger and content 
+                    creator with 3.7M+ social media followers and 920M+ video views.  
+                    I am also a 5-handicap golfer and a 2X Guinness World Record holder. 
+                    I grew up in sunny Scottsdale, Arizona and graduated from The 
+                    University of Wisconsin-Madison, with a double-major in economics 
+                    and entrepreneurship.  I am obsessed with my college, and I wouldn’t 
+                    be where I am today if I went to any other school. Go Badgers!
+                </p>
+            </div>
+
+            <div class="item">
+                <h4>3. Somaliland</h4>
+                <p>
+                    Another underrated country is Somalia, which I visited the sovereign
+                    north state of Somaliland for 5 days at the beginning of 2018.  
+                    Going in, I was very nervous as the media says nothing good about 
+                    Somalia, but I had a very safe and exciting trip!  The capital of 
+                    Hargeisa was filled with life, markets, and delicious food.  
+                    The best part overall was the camel market and visiting a UNESCO 
+                    site called Las Geel which is old rock carvings. A remarkable place, 
+                    indeed.
+                </p>
+            </div>-->
+          </div>  
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class="col s12" style="margin-top: 2em;">
+        <a [routerLink]="['showAll']">
+          <button class="btn btn-custom btn-small right" type="button">
+              More<i class="material-icons right">refresh</i>
+          </button></a>
+      </div>
+    </div>
+
+<!-- Container (The Band Section) -->
+<div id="about" class="container text-center">
+  <h3>ABOUT US</h3>
+  <p><em style="color: fuchsia;">We make Blogging fun!</em></p>
+  <p>This website has been created as part of a term-project. Given that you are 
+      here, you probably are interested in writing or reading blogs. Who doesn't?
+      Whether you want to advertise your brand, inspire people, teach something 
+      useful to others or just want to have fun, this is just the right place to 
+      start. No you don't need to make your own website! Just login and you can
+      use this platform to connect with like minded people. Create your community
+      here. Happy typing :)
+  </p>
+  <br>
+  <div class="row">
+    <div class="col-sm">
+      <p class="text-center"><strong>Maliha Nan</strong></p><br>
+      <a href="#demo2" data-toggle="collapse">
+        <img src="assets/media/339377-PAJU9E-467.jpg" class="img-circle person" alt="Image here"/>
+      </a>
+      <div id="demo2" class="collapse">
+        <p>Developer</p>
+        <p>Hope this platform is helpful to you :)</p>
+        <p>(Wasn't even able to find a cool female developer's vector.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Container (TOUR Section) -->
+<div id="firstBlog" class="bg-1">
+  <div class="container">
+    <h3 class="text-center">WRITE YOUR FIRST BLOG</h3>
+    <p class="text-center">Just fill up the below blank spaces.<br>It is that easy!</p>
+    <!--<form action="" method="post" id="blogPost">
+        <div class="form-group">
+          <label for="pageTitle">Title:</label>
+          <input type="text" class="form-control" id="pageTitle" name="pageTitle">
+        </div>
+        <div class="form-group">
+          <label for="pageCover">Cover (Optional):</label>
+          <input type="file" id="pageCover" name="pageCover">
+        </div>
+        <div class="form-group">
+          <label for="pageContent">Content:</label>
+          <textarea class="form-control" rows="7" id="pageContent"></textarea>
+        </div> 
+        <button type="submit" class="btn btn-default">Post</button>
+    </form>-->
+    <div class="bg-light"><app-blog></app-blog></div>
+  </div>
+  
+  <!-- Modal 
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+       Modal content
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4><span class="glyphicon glyphicon-lock"></span> Tickets</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <div class="form-group">
+              <label for="psw"><span class="glyphicon glyphicon-shopping-cart"></span> Tickets, $23 per person</label>
+              <input type="number" class="form-control" id="psw" placeholder="How many?">
+            </div>
+            <div class="form-group">
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Send To</label>
+              <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+            </div>
+              <button type="submit" class="btn btn-block">Pay 
+                <span class="glyphicon glyphicon-ok"></span>
+              </button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+            <span class="glyphicon glyphicon-remove"></span> Cancel
+          </button>
+          <p>Need <a href="#">help?</a></p>
+        </div>
+      </div>
+    </div>
+  </div>-->
+</div>
+
+<!-- Container (Contact Section) -->
+<div id="contact" class="container">
+  <app-contact></app-contact>
+  <br>
+  <h3 class="text-center">From Most Liked Blogs</h3>  
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Ross</a></li>
+    <li><a data-toggle="tab" href="#menu1">Chandler</a></li>
+    <li><a data-toggle="tab" href="#menu2">Joey</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h2>Dinosaurs</h2>
+      <p>
+        Dinosaurs are a diverse group of reptiles[note 1] of the clade Dinosauria. They first appeared during the Triassic period, between 243 and 233.23 million years ago, although the exact origin and timing of the evolution of dinosaurs is the subject of active research. They became the dominant terrestrial vertebrates after the Triassic–Jurassic extinction event 201 million years ago; their dominance continued through the Jurassic and Cretaceous periods. The fossil record demonstrates that birds are modern feathered dinosaurs, having evolved from earlier theropods during the late Jurassic Period. As such, birds were the only dinosaur lineage to survive the Cretaceous–Paleogene extinction event 66 million years ago. </p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h2>Just Me</h2>
+      <p>I'm gonna get all uncomfortableand probably make some stupid joke.</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h2></h2>
+      <p>I don't like when people take food out of my plate, okay?</p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center">
+  <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a><br><br>
+  <p>Made By Maliha Nan</p> 
+</footer>

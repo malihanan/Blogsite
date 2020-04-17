@@ -1,0 +1,44 @@
+<body>
+<div class="layer">
+    <div class="wow bounceIn">
+        <div class="align_container">
+        <div class="container1Login">
+        <div class="container2">
+        <div class="signup">
+            <form (submit)="loginUser($event)">
+                <table>
+                    <th>Login
+                        <a [routerLink]="''"><i class="glyphicon glyphicon-home white-text"></i></a><br/>
+                    </th>
+                    <tr><td class="input-field"><input type="email" [(ngModel)]="emailId" name="emailId" placeholder="E-mail ID"/></td></tr>
+                    <tr><td class="input-field"><input type="password" [(ngModel)]="password" name="password" placeholder="Password"/></td></tr>
+                    <tr><td class="white-text">{{errorMessage}}</td></tr><!--
+                    <tr>
+                        <td>
+                            <div class="row white-text">
+                                <div class="input-field col s8">
+                                    <i class="material-icons prefix">title</i>
+                                    <input type="text" name="title" #name="ngModel" [(ngModel)]="blogService.selectedBlog.title" placeholder="Enter Title" required>
+                                    <label>Title: 
+                                        <label class="red-text">*</label>
+                                    </label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>-->
+                    <tr>
+                        <td>
+                            <input type="submit" id="submit" value="Login"/>
+                            <input type="reset" id="reset" value="Reset"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <a class="bottomLink" [routerLink]="'/register'">Create Account</a>
+        </div>
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>

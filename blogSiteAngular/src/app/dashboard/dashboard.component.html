@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav2">
+      <h3 id="websiteTitle">{{websiteName}}</h3>
+      <ul class="nav nav-pills nav-stacked">
+          <li class="active"><a [routerLink]='[route.url]' fragment="section1">By</a></li>
+        <li><a [routerLink]='[route.url]' fragment="section2">Show Blogs</a></li>
+        <li *ngIf="sameUser">
+          <a [routerLink]='[""]' fragment="firstBlog">Manage Blogs</a>
+        </li>
+        <li *ngIf="sameUser">
+          <a [routerLink]='["/editUser"]'>Edit Details</a>
+        </li>
+        <li class="active"><a [routerLink]="''" fragment="section1">BlogSite</a></li>
+      </ul><br>
+      <!--
+      <form #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)">
+        <div class="input-group">
+          <input type="text" class="form-control" name="search" #name="ngModel" [(ngModel)]="search" placeholder="Search Blog.." required>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+        </div>
+      </form>
+    -->
+    </div>
+
+    <div class="col-sm-9">
+
+      <div id="section1">
+        <table class="responsive-table highlight">
+          <tr>
+            <td><h3>By: </h3></td>
+            <td><h3>{{fullName}}</h3></td>
+          </tr>
+          <tr>
+            <td><h3>Email Id: </h3></td>
+            <td><h3>{{emailId}}</h3></td>
+          </tr>
+        </table>
+      </div>
+      <div id="section2" class="row">
+        <h4><small style="margin-left: 3em">POSTS</small></h4>
+        <app-show-blogs [parentData]="dash_id"></app-show-blogs>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+<footer class="container-fluid">
+  <p>Footer Text</p>
+</footer>-->

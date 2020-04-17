@@ -1,0 +1,52 @@
+<h3 class="text-center">Contact</h3>
+<p class="text-center"><em>We love our user's input!</em></p>
+<div class="row">
+<div class="col-md-4">
+    <p>Fan? Drop a note.</p>
+    <p><span class="glyphicon glyphicon-map-marker"></span> Gujarat, India</p>
+    <p><span class="glyphicon glyphicon-phone"></span> Phone: +91 8758260122</p>
+    <p><span class="glyphicon glyphicon-envelope"></span> Email: malihanan09@gmail.com</p>
+</div>
+<div class="col-md-8">
+    <div class="row">
+
+    <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <label>Name: 
+                    <label class="red-text">*</label>
+                </label>
+                <input type="text" name="fullName" #name="ngModel" [(ngModel)]="fullName" placeholder="Enter Name" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <label>Email Id: 
+                    <label class="red-text">*</label>
+                </label>
+                <input type="email" name="emailId" #name="ngModel" [(ngModel)]="emailId" placeholder="Enter Email Id" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">comment</i>
+                <label>Comment: 
+                    <label class="red-text">*</label>
+                </label>
+                <textarea class="materialize-textarea" name="comment" #name="ngModel" [(ngModel)]="comment" placeholder="Enter Comment" required></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <button class="btn btn-custom btn-small right" type="button" (click)="resetForm(contactForm)">
+                    Reset<i class="material-icons right">refresh</i>
+                </button>
+                <button class="btn btn-custom btn-small right" type="submit" [disabled]="!contactForm.valid" style="margin-right: 4px;">
+                    Send<i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

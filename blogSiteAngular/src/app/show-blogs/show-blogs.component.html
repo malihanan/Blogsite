@@ -1,0 +1,186 @@
+<div style="margin: 2em;">
+    <table class="responsive-table highlight"> 
+        <div *ngIf="!getAllFlag; else getAll">
+            <div *ngIf="blogService.blogs != undefined">
+            <tr *ngFor="let i of [0,1,2]">
+                <div class="col s12" *ngIf="blogService.blogs[i] && blogService.blogs[i] != undefined">
+                    <h3>{{blogService.blogs[i].title}}
+                        <small style="color: gray; font-size: 0.5em;">
+                            <i class="material-icons" style="position:relative; top: 0.25em; font-size: 1.5em;">access_time</i>
+                            {{blogService.blogs[i].date | date:'MMM dd, yyyy, hh:mm a'}}
+                        </small>
+                    </h3>
+                    <h5 style="color: #777" >
+                        <a [routerLink]="['/dashboard', blogService.blogs[i].user_id]">
+                        by {{ by[i] }}</a>
+                    </h5>
+                    <div *ngIf="blogService.blogs[i] != undefined">
+                    <div *ngFor="let tag of blogService.blogs[i].tags" style="display: inline;">
+                        <span class="label" style="background-color: fuchsia; margin: 2px;">{{tag}}</span>
+                    </div>
+                    </div>
+                    <p style="margin-top: 4px; font-size: 1.3em;">{{blogService.blogs[i].content}}</p>
+                    <div *ngIf="likes != undefined">
+                        <h4 *ngIf="likes[i]; else notLiked">
+                            <a class="action-btn" (click)="unLike(blogService.blogs[i], i)"><span class="glyphicon glyphicon-heart"></span></a>
+                            {{ totalLikes[i] }}
+                            <a class="action-btn" (click)="showComment(blogService.blogs[i], i)"><i class="prefix material-icons" #commentIcon>comment</i></a>
+                            {{ totalComments[i] }}
+                            <form #commentForm="ngForm" (ngSubmit)="onSubmit(commentForm, blogService.blogs[i], i)" class="navbar-form navbar-right navbar-top">
+                                <div class="input-field" style="position: relative; bottom: 1.2em;">
+                                    <i class="material-icons prefix">send</i>
+                                    <input type="text" name="comment" #name="ngModel" [(ngModel)]="comments[i]" placeholder="Comment.." required>
+                                </div>
+                                <button class="btn btn-default" type="submit" style="position:absolute; left: -9999px;">
+                                </button>
+                            </form>
+                            <div *ngIf="showComments[i] && blogService.blogs[i].comments != undefined" class="card" id="comments">
+                                <h4><small>COMMENTS</small></h4>
+                                <table class="card-content responsive-table highlight">
+                                    <tr *ngFor="let comment of blogService.blogs[i].comments; let i = index">
+                                        <h4>{{comment.content}}</h4>
+                                        <h5>
+                                            <a [routerLink]="['/dashboard', comment.user_id]">
+                                                by {{commentBy[i]}} </a>
+                                            <small style="color: gray; font-size: 0.8em;">
+                                                <i class="material-icons" style="position:relative; top: 0.25em; font-size: 1.5em;">access_time</i>
+                                                {{comment.date | date:'MMM dd, yyyy, hh:mm a'}}
+                                            </small>
+                                        </h5>
+                                    </tr>
+                                </table>
+                            </div>
+                        </h4>
+                    </div>
+                    <ng-template #notLiked>
+                        <h4>
+                            <a class="action-btn" (click)="like(blogService.blogs[i], i)"><span class="glyphicon glyphicon-heart-empty"></span></a>
+                            {{ totalLikes[i] }} 
+                            <a class="action-btn" (click)="showComment(blogService.blogs[i], i)"><i class="prefix material-icons" #commentIcon>comment</i></a>
+                            {{ totalComments[i] }}
+                            <form #commentForm="ngForm" (ngSubmit)="onSubmit(commentForm, blogService.blogs[i], i)" class="navbar-form navbar-right navbar-top">
+                                <div class="input-field" style="position: relative; bottom: 1.2em;">
+                                    <i class="material-icons prefix">send</i>
+                                    <input type="text" name="comment" #name="ngModel" [(ngModel)]="comments[i]" placeholder="Comment.." required>
+                                </div>
+                                <button class="btn btn-default" type="submit" style="position:absolute; left: -9999px;">
+                                </button>
+                            </form>
+                            <div *ngIf="showComments[i] && blogService.blogs[i].comments != undefined" class="card" id="comments">
+                                <h4><small>COMMENTS</small></h4>
+                                <table class="card-content responsive-table highlight">
+                                    <tr *ngFor="let comment of blogService.blogs[i].comments; let i = index">
+                                        <h4>{{comment.content}}</h4>
+                                        <h5>
+                                            <a [routerLink]="['/dashboard', comment.user_id]">
+                                                by {{commentBy[i]}} </a>
+                                            <small style="color: gray; font-size: 0.8em;">
+                                                <i class="material-icons" style="position:relative; top: 0.25em; font-size: 1.5em;">access_time</i>
+                                                {{comment.date | date:'MMM dd, yyyy, hh:mm a'}}
+                                            </small>
+                                        </h5>
+                                    </tr>
+                                </table>
+                            </div>
+                        </h4>
+                    </ng-template>
+                </div>
+            </tr>
+            </div>
+            <div style="margin-top: 2em;">
+                <button class="btn btn-custom btn-small right" type="button" (click)="getAllBlogs()">
+                    Get All<i class="material-icons right">refresh</i>
+                </button>
+            </div>
+        </div>
+        <ng-template #getAll>
+            <tr *ngFor="let blog of blogService.blogs; index as i">
+                <div *ngIf="blogService.blogs[i] != undefined">
+                    <h3>{{blog.title}}
+                        <small style="color: gray; font-size: 0.5em;">
+                            <i class="material-icons" style="position:relative; top: 0.25em; font-size: 1.5em;">access_time</i>
+                            {{blog.date | date:'MMM dd, yyyy, hh:mm a'}}
+                        </small>
+                    </h3>
+                    <h5 style="color: #777">
+                        <a [routerLink]="['/dashboard', blogService.blogs[i].user_id]">
+                        by {{ by[i] }}</a>
+                    </h5>
+                    <div *ngFor="let tag of blog.tags" style="display: inline;">
+                        <span class="label" style="background-color: fuchsia; margin: 2px;">{{tag}}</span>
+                    </div>
+                    <p style="margin-top: 4px; font-size: 1.3em;">{{blog.content}}</p>
+                    <div *ngIf="likes != undefined">
+                        <h4 *ngIf="likes[i]; else notLiked">
+                            <a class="action-btn" (click)="unLike(blogService.blogs[i], i)"><span class="glyphicon glyphicon-heart"></span></a>
+                            {{ totalLikes[i] }}
+                            <a class="action-btn" (click)="showComment(blogService.blogs[i], i)"><i class="prefix material-icons" #commentIcon>comment</i></a>
+                            {{ totalComments[i] }}
+                            <form #commentForm="ngForm" (ngSubmit)="onSubmit(commentForm, blogService.blogs[i], i)" class="navbar-form navbar-right navbar-top">
+                                <div class="input-field" style="position: relative; bottom: 1.2em;">
+                                    <i class="material-icons prefix">send</i>
+                                    <input type="text" name="comment" #name="ngModel" [(ngModel)]="comments[i]" placeholder="Comment.." required>
+                                </div>
+                                <button class="btn btn-default" type="submit" style="position:absolute; left: -9999px;">
+                                </button>
+                            </form>
+                            <div *ngIf="showComments[i] && blogService.blogs[i].comments != undefined" class="card" id="comments">
+                                <h4><small>COMMENTS</small></h4>
+                                <table class="card-content responsive-table highlight">
+                                    <tr *ngFor="let comment of blogService.blogs[i].comments; let i = index">
+                                        <h4>{{comment.content}}</h4>
+                                        <h5>
+                                            <a [routerLink]="['/dashboard', comment.user_id]">
+                                                by {{commentBy[i]}} </a>
+                                            <small style="color: gray; font-size: 0.8em;">
+                                                <i class="material-icons" style="position:relative; top: 0.25em; font-size: 1.5em;">access_time</i>
+                                                {{comment.date | date:'MMM dd, yyyy, hh:mm a'}}
+                                            </small>
+                                        </h5>
+                                    </tr>
+                                </table>
+                            </div>
+                        </h4>
+                    </div>
+                    <ng-template #notLiked>
+                        <h4>
+                            <a class="action-btn" (click)="like(blogService.blogs[i], i)"><span class="glyphicon glyphicon-heart-empty"></span></a>
+                            {{ totalLikes[i] }}
+                            <a class="action-btn" (click)="showComment(blogService.blogs[i], i)"><i class="prefix material-icons" #commentIcon>comment</i></a>
+                            {{ totalComments[i] }}
+                            <form #commentForm="ngForm" (ngSubmit)="onSubmit(commentForm, blogService.blogs[i], i)" class="navbar-form navbar-right navbar-top">
+                                <div class="input-field" style="position: relative; bottom: 1.2em;">
+                                    <i class="material-icons prefix">send</i>
+                                    <input type="text" name="comment" #name="ngModel" [(ngModel)]="comments[i]" placeholder="Comment.." required>
+                                </div>
+                                <button class="btn btn-default" type="submit" style="position:absolute; left: -9999px;">
+                                </button>
+                            </form>
+                            <div *ngIf="showComments[i] && blogService.blogs[i].comments != undefined" class="card" id="comments">
+                                <h4><small>COMMENTS</small></h4>
+                                <table class="card-content responsive-table highlight">
+                                    <tr *ngFor="let comment of blogService.blogs[i].comments; let i = index">
+                                        <h4>{{comment.content}}</h4>
+                                        <h5>
+                                            <a [routerLink]="['/dashboard', comment.user_id]">
+                                                by {{commentBy[i]}} </a>
+                                            <small style="color: gray; font-size: 0.8em;">
+                                                <i class="material-icons" style="position:relative; top: 0.25em; font-size: 1.5em;">access_time</i>
+                                                {{comment.date | date:'MMM dd, yyyy, hh:mm a'}}
+                                            </small>
+                                        </h5>
+                                    </tr>
+                                </table>
+                            </div>
+                        </h4>
+                    </ng-template>
+                </div>
+            </tr>
+            <div class="col s12" style="margin-top: 2em;">
+                <button class="btn btn-custom btn-small right" type="button" (click)="getLessBlogs()">
+                    Get Less<i class="material-icons right">refresh</i>
+                </button>
+            </div>
+        </ng-template>
+    </table>
+</div>

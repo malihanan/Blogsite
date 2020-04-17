@@ -1,0 +1,29 @@
+<body>
+<div class="layer">
+    <div class="wow bounceIn">
+        <div class="align_container"><div class="container1SignUp"><div class="container2">
+        <div class="signup">
+            <form (submit)="registerUser($event)">
+                <table>
+                    <th>Sign Up
+                        <a [routerLink]="''"><i class="glyphicon glyphicon-home white-text"></i></a><br/>
+                    </th>
+                    <tr><td class="input-field"><input type="text" [(ngModel)]="fullName" name="fullName" placeholder="Full Name" required/></td></tr>
+                    <tr><td class="input-field"><input type="email" [(ngModel)]="emailId" name="email" placeholder="E-mail ID" required/></td></tr>
+                    <tr><td class="input-field"><input type="password" [(ngModel)]="password" name="password" placeholder="Password" required minlength="6" maxlength="10"/></td></tr>
+                    <tr><td class="input-field"><input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Reenter Password"/></td></tr>
+                    <tr><td class="input-field"><input type="text" [(ngModel)]="websiteName" name="websiteName" placeholder="Website Name" required/></td></tr>
+                    <tr><td class="input-field"><input type="tel" [(ngModel)]="contact" name="contact" placeholder="Contact No." pattern="[0-9]{10}"/></td></tr>
+                    <tr>
+                        <td>
+                            <input type="submit" id="submit" value="Sign Up"/>
+                            <input type="reset" id="reset" value="Reset"/>
+                        </td>
+                    </tr>
+                </table>
+                <a class="bottomLink" [routerLink]="'/login'">Already a user?... Login</a>
+            </form>
+        </div></div></div></div>
+    </div>
+</div>
+</body>

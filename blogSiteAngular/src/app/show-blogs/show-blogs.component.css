@@ -1,0 +1,54 @@
+.input-field label {
+    color: fuchsia;
+  }
+  .input-field input[type=text]:focus + label{
+    color: fuchsia;
+  }
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid fuchsia;
+    box-shadow: 0 1px 0 0 fuchsia;
+  }
+  .input-field input[type=text].valid {
+    border-bottom: 1px solid fuchsia;
+    box-shadow: 0 1px 0 0 fuchsia;
+  }
+  .input-field input[type=text].invalid, .input-field textarea.invalid {
+    border-bottom: 1px solid red;
+    box-shadow: 0 1px 0 0 red;
+  }
+  .input-field .prefix.active {
+    color: fuchsia;
+  }
+  button {
+    background-color: fuchsia;
+}
+button:hover, button:active, button:link, button:focus {
+    background: transparent;
+    color: fuchsia;
+    border: 0.1em solid fuchsia;
+    box-sizing: border-box;
+}
+input[name="comment"]{
+  width: 50vw;
+}
+#commentForm {
+  float: right;
+}
+span, i {
+    font-size: 1em;
+}
+#commentIcon {
+    margin-left: 1em;
+}
+.glyphicon-heart {
+    color: red;
+}
+.glyphicon-heart-empty {
+    color: black;
+}
+#comments{
+  margin-left: 2em;
+  width: 70vw;
+  max-height: 30vh;
+  overflow: auto;
+}
