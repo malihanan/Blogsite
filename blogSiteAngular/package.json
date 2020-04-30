@@ -22,7 +22,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^3.4.1",
     "express-session": "^1.16.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ngx-cookie-service": "^2.2.0",
     "ngx-wow": "^2.0.1",
     "rxjs": "~6.4.0",
